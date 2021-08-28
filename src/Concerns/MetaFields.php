@@ -88,14 +88,13 @@ trait MetaFields
             $meta = [$meta => $value];
         }
 
-        $query->whereHas('meta', function (Builder $query) use ($meta, $operator) {
-            foreach ($meta as $key => $value) {
+        foreach ($meta as $key => $value) {
+            $query->whereHas('meta', function (Builder $query) use ($key, $value, $operator) {
                 $query->where('meta_key', $key);
-
                 return is_null($value) ? $query :
                     $query->where('meta_value', $operator, $value);
-            }
-        });
+            });
+        };
 
         return $query;
     }
