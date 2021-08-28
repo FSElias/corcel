@@ -94,7 +94,7 @@ trait MetaFields
                 return is_null($value) ? $query :
                     $query->where('meta_value', $operator, $value);
             });
-        };
+        }
 
         return $query;
     }
